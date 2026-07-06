@@ -1,0 +1,91 @@
+================================================================================
+function definition
+================================================================================
+
+I64 Add(I64 a, I64 b) { return a + b; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    type: (primitive_type)
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (primitive_type)
+          declarator: (identifier))
+        (parameter_declaration
+          type: (primitive_type)
+          declarator: (identifier))))
+    body: (compound_statement
+      (return_statement
+        (binary_expression
+          left: (identifier)
+          right: (identifier))))))
+
+================================================================================
+default return type
+================================================================================
+
+Main() { return 0; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list))
+    body: (compound_statement
+      (return_statement
+        (number_literal)))))
+
+================================================================================
+pointer return and public prototype
+================================================================================
+
+public U8 *MAlloc(I64 size);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    (linkage_specifier)
+    type: (primitive_type)
+    (pointer_declarator
+      declarator: (function_declarator
+        declarator: (identifier)
+        parameters: (parameter_list
+          (parameter_declaration
+            type: (primitive_type)
+            declarator: (identifier)))))))
+
+================================================================================
+default arguments
+================================================================================
+
+I64 Box(I64 w = 2, I64 h = 3) { return w * h; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (function_definition
+    type: (primitive_type)
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (primitive_type)
+          declarator: (identifier)
+          default: (number_literal))
+        (parameter_declaration
+          type: (primitive_type)
+          declarator: (identifier)
+          default: (number_literal))))
+    body: (compound_statement
+      (return_statement
+        (binary_expression
+          left: (identifier)
+          right: (identifier))))))
+

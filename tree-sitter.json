@@ -1,0 +1,48 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "holyc",
+      "camelcase": "HolyC",
+      "scope": "source.holyc",
+      "path": ".",
+      "file-types": [
+        "HC",
+        "hc"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "injections": [
+        "queries/injections.scm"
+      ],
+      "locals": [
+        "queries/locals.scm"
+      ],
+      "tags": [
+        "queries/tags.scm"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "HolyC grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "project-solomon"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/project-solomon/tree-sitter-holyc"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": false,
+    "rust": true,
+    "swift": false
+  }
+}

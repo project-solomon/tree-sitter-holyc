@@ -1,0 +1,109 @@
+================================================================================
+class with members
+================================================================================
+
+class Point { I64 x, y; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    type: (class_specifier
+      name: (type_identifier)
+      body: (field_declaration_list
+        (field_declaration
+          type: (primitive_type)
+          (identifier)
+          (identifier))))))
+
+================================================================================
+class without trailing semicolon
+================================================================================
+
+class Fbn { I64 n; I64 d[120]; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    type: (class_specifier
+      name: (type_identifier)
+      body: (field_declaration_list
+        (field_declaration
+          type: (primitive_type)
+          (identifier))
+        (field_declaration
+          type: (primitive_type)
+          (array_declarator
+            declarator: (identifier)
+            size: (number_literal)))))))
+
+================================================================================
+union
+================================================================================
+
+union U { U64 word; U8 bytes[8]; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    type: (union_specifier
+      name: (type_identifier)
+      body: (field_declaration_list
+        (field_declaration
+          type: (primitive_type)
+          (identifier))
+        (field_declaration
+          type: (primitive_type)
+          (array_declarator
+            declarator: (identifier)
+            size: (number_literal)))))))
+
+================================================================================
+class with base and field metadata
+================================================================================
+
+public class KTask : Base { U8 *self; I64 ch format "%d"; };
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_definition
+    (linkage_specifier)
+    type: (class_specifier
+      name: (type_identifier)
+      base: (type_identifier)
+      body: (field_declaration_list
+        (field_declaration
+          type: (primitive_type)
+          (pointer_declarator
+            declarator: (identifier)))
+        (field_declaration
+          type: (primitive_type)
+          (identifier)
+          (field_meta
+            key: (property_identifier)
+            value: (string_literal
+              (string_content))))))))
+
+================================================================================
+inline instance declaration
+================================================================================
+
+class Pair { I64 a, b; } p, q;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (class_specifier
+      name: (type_identifier)
+      body: (field_declaration_list
+        (field_declaration
+          type: (primitive_type)
+          (identifier)
+          (identifier))))
+    (identifier)
+    (identifier)))
+

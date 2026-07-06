@@ -1,0 +1,75 @@
+================================================================================
+define and include
+================================================================================
+
+#include "::/KConfig.HC"
+#define NULL 0
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preproc_include
+    path: (string_literal
+      (string_content)))
+  (preproc_define
+    name: (identifier)
+    value: (preproc_arg)))
+
+================================================================================
+conditional directives
+================================================================================
+
+#ifdef DEBUG
+#endif
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preproc_directive
+    argument: (preproc_arg))
+  (preproc_directive))
+
+================================================================================
+directive argument stays on its own line
+================================================================================
+
+#ifdef FOO
+I64 x;
+#else
+I64 y;
+#endif
+I64 z;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preproc_directive
+    argument: (preproc_arg))
+  (declaration
+    type: (primitive_type)
+    (identifier))
+  (preproc_directive)
+  (declaration
+    type: (primitive_type)
+    (identifier))
+  (preproc_directive)
+  (declaration
+    type: (primitive_type)
+    (identifier)))
+
+================================================================================
+define with no value does not swallow the next line
+================================================================================
+
+#define FLAG
+I64 w;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preproc_define
+    name: (identifier))
+  (declaration
+    type: (primitive_type)
+    (identifier)))
+

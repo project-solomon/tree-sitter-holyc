@@ -1,0 +1,91 @@
+================================================================================
+global variable with initializer
+================================================================================
+
+I64 counter = 0;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (primitive_type)
+    (init_declarator
+      declarator: (identifier)
+      value: (number_literal))))
+
+================================================================================
+array and multiple declarators
+================================================================================
+
+I64 arr[5], i, sum = 0;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (primitive_type)
+    (array_declarator
+      declarator: (identifier)
+      size: (number_literal))
+    (identifier)
+    (init_declarator
+      declarator: (identifier)
+      value: (number_literal))))
+
+================================================================================
+pointer declaration
+================================================================================
+
+U8 *buf;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (primitive_type)
+    (pointer_declarator
+      declarator: (identifier))))
+
+================================================================================
+function pointer declaration
+================================================================================
+
+I64 (*op)(I64, I64);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (primitive_type)
+    (function_declarator
+      declarator: (parenthesized_declarator
+        (pointer_declarator
+          declarator: (identifier)))
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (primitive_type))
+        (parameter_declaration
+          type: (primitive_type))))))
+
+================================================================================
+reg and noreg storage classes
+================================================================================
+
+I64 reg R15 i = 5, noreg j, reg k;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (declaration
+    type: (primitive_type)
+    storage: (storage_class
+      register: (register_name
+        (identifier)))
+    (init_declarator
+      declarator: (identifier)
+      value: (number_literal))
+    storage: (storage_class)
+    (identifier)
+    storage: (storage_class)
+    (identifier)))
+

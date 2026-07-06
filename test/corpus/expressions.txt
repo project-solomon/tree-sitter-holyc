@@ -1,0 +1,114 @@
+================================================================================
+precedence and bitwise
+================================================================================
+
+x = a & b == c;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (binary_expression
+          left: (identifier)
+          right: (identifier))
+        right: (identifier)))))
+
+================================================================================
+cast and dereference
+================================================================================
+
+y = *(I64 *)(&z);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (unary_expression
+        argument: (cast_expression
+          type: (type_descriptor
+            type: (primitive_type)
+            declarator: (abstract_pointer_declarator))
+          value: (parenthesized_expression
+            (unary_expression
+              argument: (identifier))))))))
+
+================================================================================
+sizeof and offset
+================================================================================
+
+n = sizeof(I64) + offset(Point.y);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (sizeof_expression
+          type: (type_descriptor
+            type: (primitive_type)))
+        right: (offset_expression
+          type: (type_identifier)
+          member: (field_identifier))))))
+
+================================================================================
+call with skipped argument
+================================================================================
+
+F(, 6);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (call_expression
+      function: (identifier)
+      arguments: (argument_list
+        (number_literal)))))
+
+================================================================================
+backtick power
+================================================================================
+
+p = 2`8;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (number_literal)
+        right: (number_literal)))))
+
+================================================================================
+member access chains
+================================================================================
+
+v = o.lo.a + p->next->val;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      left: (identifier)
+      right: (binary_expression
+        left: (field_expression
+          argument: (field_expression
+            argument: (identifier)
+            field: (field_identifier))
+          field: (field_identifier))
+        right: (field_expression
+          argument: (field_expression
+            argument: (identifier)
+            field: (field_identifier))
+          field: (field_identifier))))))
+

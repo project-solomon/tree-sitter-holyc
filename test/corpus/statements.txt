@@ -1,0 +1,236 @@
+================================================================================
+if else
+================================================================================
+
+if (x < 0) "neg"; else "pos";
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    condition: (parenthesized_expression
+      (binary_expression
+        left: (identifier)
+        right: (number_literal)))
+    consequence: (expression_statement
+      (string_literal
+        (string_content)))
+    alternative: (expression_statement
+      (string_literal
+        (string_content)))))
+
+================================================================================
+for loop
+================================================================================
+
+for (i = 0; i < 5; i++) sum += i;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (for_statement
+    initializer: (assignment_expression
+      left: (identifier)
+      right: (number_literal))
+    condition: (binary_expression
+      left: (identifier)
+      right: (number_literal))
+    update: (update_expression
+      argument: (identifier))
+    body: (expression_statement
+      (assignment_expression
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+while and do-while
+================================================================================
+
+while (n) n--;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (while_statement
+    condition: (parenthesized_expression
+      (identifier))
+    body: (expression_statement
+      (update_expression
+        argument: (identifier)))))
+
+================================================================================
+switch with range and auto case
+================================================================================
+
+switch (n) { case 1 ... 3: "lo"; break; case: "z"; default: "hi"; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (switch_statement
+    condition: (parenthesized_expression
+      (identifier))
+    body: (compound_statement
+      (case_statement
+        value: (number_literal)
+        end: (number_literal))
+      (expression_statement
+        (string_literal
+          (string_content)))
+      (break_statement)
+      (case_statement)
+      (expression_statement
+        (string_literal
+          (string_content)))
+      (default_statement)
+      (expression_statement
+        (string_literal
+          (string_content))))))
+
+================================================================================
+goto and label
+================================================================================
+
+loop:
+goto loop;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (labeled_statement
+    label: (statement_identifier)
+    (goto_statement
+      label: (statement_identifier))))
+
+================================================================================
+try catch throw
+================================================================================
+
+try { Risky(5); } catch { "caught"; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (try_statement
+    body: (compound_statement
+      (expression_statement
+        (call_expression
+          function: (identifier)
+          arguments: (argument_list
+            (number_literal)))))
+    handler: (compound_statement
+      (expression_statement
+        (string_literal
+          (string_content))))))
+
+================================================================================
+lock block
+================================================================================
+
+lock { x++; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (lock_statement
+    body: (compound_statement
+      (expression_statement
+        (update_expression
+          argument: (identifier))))))
+
+================================================================================
+inline print statement
+================================================================================
+
+"%d %s\n", x, name;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (comma_expression
+      left: (string_literal
+        (string_content)
+        (escape_sequence))
+      right: (comma_expression
+        left: (identifier)
+        right: (identifier)))))
+
+
+================================================================================
+no_warn directive
+================================================================================
+
+no_warn a, b;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (no_warn_statement
+    name: (identifier)
+    name: (identifier)))
+
+================================================================================
+inline asm block
+================================================================================
+
+asm {
+  mov rax, x;
+  add rax, 1;
+}
+asm arm64 {
+  mov x0, x;
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (asm_statement
+    (asm_instruction
+      mnemonic: (asm_mnemonic)
+      operand: (identifier)
+      operand: (identifier))
+    (asm_instruction
+      mnemonic: (asm_mnemonic)
+      operand: (identifier)
+      operand: (number_literal)))
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic)
+      operand: (identifier)
+      operand: (identifier))))
+
+================================================================================
+asm architecture qualifiers
+================================================================================
+
+asm amd64 { nop; }
+asm arm64 { nop; }
+asm riscv64 { nop; }
+asm ppc64le { nop; }
+asm s390x { nop; }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic)))
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic)))
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic)))
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic)))
+  (asm_statement
+    arch: (asm_arch)
+    (asm_instruction
+      mnemonic: (asm_mnemonic))))
