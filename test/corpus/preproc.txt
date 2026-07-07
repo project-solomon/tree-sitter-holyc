@@ -73,3 +73,29 @@ I64 w;
     type: (primitive_type)
     (identifier)))
 
+
+================================================================================
+function-like macros
+================================================================================
+
+#define SQ(x) ((x) * (x))
+#define LOG(fmt, ...) fmt
+#define F (x)
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (preproc_function_def
+    name: (identifier)
+    parameters: (preproc_params
+      (identifier))
+    value: (preproc_arg))
+  (preproc_function_def
+    name: (identifier)
+    parameters: (preproc_params
+      (identifier)
+      (variadic_parameter))
+    value: (preproc_arg))
+  (preproc_define
+    name: (identifier)
+    value: (preproc_arg)))

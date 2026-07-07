@@ -93,13 +93,15 @@ module.exports = grammar({
     // Preprocessor
     //
     // The compiler runs a separate, line-based preprocessing pass before
-    // parsing (hcc/token/preproc.go). It supports object-like macros only and
+    // parsing (hcc/frontend/Preprocessor.zig). It supports object-like and
+    // function-like macros (the latter a C extension over TempleOS HolyC) plus
     // the usual conditional/include directives. We model each directive as a
     // single line rather than balanced #if/#endif regions, so unbalanced or
     // half-written conditionals never break parsing of the surrounding code.
     // ---------------------------------------------------------------------
     _preproc: $ => choice(
       $.preproc_include,
+      $.preproc_function_def,
       $.preproc_define,
       $.preproc_undef,
       $.preproc_directive,
@@ -116,6 +118,26 @@ module.exports = grammar({
       'define',
       field('name', $.identifier),
       field('value', optional($.preproc_arg)),
+    ),
+
+    // Function-like macro: `#define NAME(params) body`. The `(` must abut the
+    // name with no space (token.immediate) — that is exactly how the compiler
+    // tells `#define F(x) …` from an object-like `#define F (x) …`.
+    preproc_function_def: $ => seq(
+      '#',
+      'define',
+      field('name', $.identifier),
+      field('parameters', $.preproc_params),
+      field('value', optional($.preproc_arg)),
+    ),
+
+    // The opening `(` must out-prioritize preproc_arg (which also starts right
+    // after the name and carries prec 1), so a name immediately followed by `(`
+    // is read as a parameter list rather than an object-like body.
+    preproc_params: $ => seq(
+      token.immediate(prec(2, '(')),
+      commaSep(choice($.identifier, $.variadic_parameter)),
+      ')',
     ),
 
     preproc_undef: $ => seq(

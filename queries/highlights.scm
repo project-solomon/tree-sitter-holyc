@@ -75,6 +75,10 @@
 (preproc_arg) @constant.macro
 (preproc_define
   name: (identifier) @constant.macro)
+(preproc_function_def
+  name: (identifier) @function.macro)
+(preproc_params
+  (identifier) @variable.parameter)
 (preproc_undef
   name: (identifier) @constant.macro)
 
