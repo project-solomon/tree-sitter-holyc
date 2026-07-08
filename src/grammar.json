@@ -526,6 +526,43 @@
         ]
       }
     },
+    "asm_extern_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "_extern"
+        },
+        {
+          "type": "FIELD",
+          "name": "label",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_type_specifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "declarator",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_declarator"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
     "linkage_specifier": {
       "type": "CHOICE",
       "members": [
@@ -536,10 +573,6 @@
         {
           "type": "STRING",
           "value": "extern"
-        },
-        {
-          "type": "STRING",
-          "value": "import"
         }
       ]
     },
@@ -1633,6 +1666,10 @@
         {
           "type": "SYMBOL",
           "name": "type_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asm_extern_declaration"
         },
         {
           "type": "SYMBOL",

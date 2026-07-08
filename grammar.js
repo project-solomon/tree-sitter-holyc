@@ -196,7 +196,17 @@ module.exports = grammar({
       optional(';'),
     )),
 
-    linkage_specifier: _ => choice('public', 'extern', 'import'),
+    // `_extern <LABEL> <signature>;` — an asm-linkage prototype binding a typed
+    // HolyC name to a label defined in a top-level `asm {}` block. No body.
+    asm_extern_declaration: $ => seq(
+      '_extern',
+      field('label', $.identifier),
+      field('type', $._type_specifier),
+      field('declarator', $._declarator),
+      ';',
+    ),
+
+    linkage_specifier: _ => choice('public', 'extern'),
 
     _init_declarator: $ => seq(
       optional(field('storage', $.storage_class)),
@@ -389,6 +399,7 @@ module.exports = grammar({
       $.compound_statement,
       $.declaration,
       $.type_definition,
+      $.asm_extern_declaration,
       $.expression_statement,
       $.if_statement,
       $.while_statement,

@@ -234,3 +234,22 @@ asm s390x { nop; }
     arch: (asm_arch)
     (asm_instruction
       mnemonic: (asm_mnemonic))))
+
+================================================================================
+_extern asm-linkage prototype
+================================================================================
+
+_extern TRIPLE I64 Triple(I64 x);
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (asm_extern_declaration
+    label: (identifier)
+    type: (primitive_type)
+    declarator: (function_declarator
+      declarator: (identifier)
+      parameters: (parameter_list
+        (parameter_declaration
+          type: (primitive_type)
+          declarator: (identifier))))))

@@ -122,7 +122,7 @@
 [
   "public"
   "extern"
-  "import"
+  "_extern"
 ] @keyword.modifier
 
 [

@@ -100,6 +100,10 @@
     "named": true,
     "subtypes": [
       {
+        "type": "asm_extern_declaration",
+        "named": true
+      },
+      {
         "type": "asm_statement",
         "named": true
       },
@@ -393,6 +397,42 @@
           },
           {
             "type": "comma_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "asm_extern_declaration",
+    "named": true,
+    "fields": {
+      "declarator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_declarator",
+            "named": true
+          }
+        ]
+      },
+      "label": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_type_specifier",
             "named": true
           }
         ]
@@ -2398,6 +2438,10 @@
     "named": false
   },
   {
+    "type": "_extern",
+    "named": false
+  },
+  {
     "type": "`",
     "named": false
   },
@@ -2519,10 +2563,6 @@
   },
   {
     "type": "ifndef",
-    "named": false
-  },
-  {
-    "type": "import",
     "named": false
   },
   {
